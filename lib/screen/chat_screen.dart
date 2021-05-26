@@ -36,28 +36,16 @@ class ChatScreen extends StatelessWidget {
         children: [
           Expanded(
             child: Scrollbar(
-//                showTrackOnHover: true,
-//               controller: _scrollController,
-              child: StreamBuilder(
+              child: StreamBuilder<FetchHistoryResult>(
                 stream: channel.history().more().asStream(),
                 builder: (BuildContext ctx, snapshot) {
                   if (snapshot.hasData) {
-                    final data = snapshot.data as FetchHistoryResult;
+                    final data = snapshot.data;
                     final e = data.messages.cast<Map<String, dynamic>>();
-                    // for(final i in e){
-                    //  print( i['message']['text']);
-                    // }
-                    // print('dataLength>>> $e ');
-                    // print('data>>> ${snapshot.data['messages']}');
-                    // return Container();
-                    e.map((e) => print(e.toString()));
+
                     return ListView.builder(
-                        itemCount: e.length,
-                        // controller: _scrollController,
-                        // itemCount: messages.length,
+                        itemCount: 27,
                         itemBuilder: (_, index) {
-                          // final message = messages.elementAt(index);
-                          // bool isMe = pubNub. == message.user;
                           return Container(
                             child: Text(e[index]['message']['text'].toString()),
                           );
